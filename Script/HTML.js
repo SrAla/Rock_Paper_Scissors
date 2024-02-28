@@ -1,3 +1,11 @@
+let buttonRock = document.querySelector('.Rock');
+let buttonPaper = document.querySelector('.Paper');
+let buttonScissors = document.querySelector('.Scissors');
+let score = document.querySelector('.Score');
+let victory= 0;
+let defeat= 0;
+let draws = 0;
+let outcome; 
 let computerSelection;
 let computerRoll = 0;
 let playerSelection;
@@ -25,12 +33,7 @@ function playRPS (playerSelection, computerSelection) {
     computerSelection = getcomputerChoice();
     computerSelection = computerSelection.toUpperCase();
     
-    playerSelection = prompt("enter your move : ");
     playerSelection = playerSelection.toUpperCase();
-    
-    console.log(`Computer chose : ${computerSelection}`);
-    console.log(`Player chose : ${playerSelection}`);
-
     
     if (playerSelection == "ROCK") {
         if (computerSelection == "ROCK") {
@@ -58,38 +61,109 @@ function playRPS (playerSelection, computerSelection) {
         }
     }
 
-    console.log(message)
     return message;
-
 }
 
 
-function playGame () {
+function resetScore () {
+    victory = 0;
+    defeat = 0;
+    draws = 0;
+    playerSelection = "";
+    computerSelection = "";
+    outcome = "";
+    showScore(playerSelection);
+}
 
-    let outcome = ""
-    let i = 0;
-    let victory= 0;
-    let defeat= 0;
-    let draws = 0;
 
-    while (i < 5) {
-        outcome = playRPS();
-        if (outcome == "You win") {
-            victory = victory + 1 ;
-        } else if (outcome == "You lose") {
-            defeat = defeat + 1;
-        } else {
-            draws = draws + 1 ;
-        }
-        i++; 
+function showScore (playerSelection) {
+    score.innerText = `Computer chose : ${computerSelection}
+                    Player chose : ${playerSelection}
+                    ${outcome}
+                    The score is : 
+                    ${victory} Victories
+                    ${defeat} Defeats
+                    ${draws} Draws`
+}
 
-        console.log(`Victories: ${victory}`);
-        console.log(`Defeats: ${defeat}`);
-        console.log(`Draws: ${draws}`);
+
+buttonRock.addEventListener('click', () => {
+
+    playerSelection = "Rock"
+    outcome = playRPS(playerSelection,"");
+    if (outcome == "You win") {
+        victory = victory + 1 ;
+    } else if (outcome == "You lose") {
+        defeat = defeat + 1;
+    } else {
+        draws = draws + 1 ;
     }
-
+    showScore(playerSelection);
     
-    
-}
+    if (victory == 5 || defeat == 5 || draws == 5) {
+        if (victory == 5) {
+            alert("Game over, you won!")
+        } else if (defeat == 5){
+            alert("Game over, you lost!")
+        } else {
+            alert("Game over, it's draw!")
+        }
 
-playGame();
+        resetScore();
+ 
+    }
+})
+
+
+buttonPaper.addEventListener('click', () => {
+
+    playerSelection = "Paper"
+    outcome = playRPS(playerSelection,"");
+    if (outcome == "You win") {
+        victory = victory + 1 ;
+    } else if (outcome == "You lose") {
+        defeat = defeat + 1;
+    } else {
+        draws = draws + 1 ;
+    }
+    showScore(playerSelection);
+    
+    if (victory == 5 || defeat == 5 || draws == 5) {
+        if (victory == 5) {
+            alert("Game over, you won!")
+        } else if (defeat == 5){
+            alert("Game over, you lost!")
+        } else {
+            alert("Game over, it's draw!")
+        }
+        resetScore();
+
+    }
+})
+
+
+buttonScissors.addEventListener('click', () => {
+
+    playerSelection = "Scissors";
+    outcome = playRPS(playerSelection,"");
+    if (outcome == "You win") {
+        victory = victory + 1 ;
+    } else if (outcome == "You lose") {
+        defeat = defeat + 1;
+    } else {
+        draws = draws + 1 ;
+    }
+    showScore(playerSelection);
+    
+    if (victory == 5 || defeat == 5 || draws == 5) {
+        if (victory == 5) {
+            alert("Game over, you won!")
+        } else if (defeat == 5){
+            alert("Game over, you lost!")
+        } else {
+            alert("Game over, it's draw!")
+        }
+        resetScore();
+  
+    }
+})
